@@ -10,7 +10,7 @@ const createUser = async (
     next: NextFunction
 )=> {
     try {
-        const user = await model.createUser(res.locals.user);
+        const user = await model.create(res.locals.user);
         return res.json(successResponse({ data: user }));
     } catch (error) {
         next(error);
@@ -23,7 +23,7 @@ const authUser = async (
     next: NextFunction
 )=> {
     try {
-        const user = await model.authUser(res.locals.user);
+        const user = await model.auth(res.locals.user);
         return res.json(successResponse({ data: user }));
     } catch (error) {
         next(error);
@@ -36,7 +36,7 @@ const indexUsers = async (
     next: NextFunction
 )=> {
     try {
-        const users = await model.indexUsers();
+        const users = await model.index();
         return res.json(successResponse({ data: users }));
     } catch (error) {
         next(error);
@@ -49,7 +49,7 @@ const showUser = async (
     next: NextFunction
 )=> {
     try {
-        const user = await model.showUser(res.locals.id);
+        const user = await model.show(res.locals.id);
         return res.json(successResponse({ data: user }));
     } catch (error) {
         next(error);

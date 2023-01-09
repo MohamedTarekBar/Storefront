@@ -11,7 +11,7 @@ const createOrderProducts = async (
     next: NextFunction
 )=> {
     try {
-        const orderProducts = await model.createOrderProducts(res.locals.orderProducts);
+        const orderProducts = await model.create(res.locals.orderProducts);
         return res.json(successResponse({ data: orderProducts }));
     } catch (error) {
         next(error);
@@ -24,7 +24,7 @@ const indexOrderProducts = async (
     next: NextFunction
 )=> {
     try {
-        const orderProducts = await model.indexOrderProducts();
+        const orderProducts = await model.index();
         return res.json(successResponse({ data: orderProducts }));
     } catch (error) {
         next(error);
@@ -37,7 +37,8 @@ const showOrderProducts = async (
     next: NextFunction
 )=> {
     try {
-        const orderProducts = await model.showOrderProducts(res.locals.id);
+        console.log(res.locals.orderProducts);
+        const orderProducts = await model.show(res.locals.orderProducts);
         return res.json(successResponse({ data: orderProducts }));
     } catch (error) {
         next(error);

@@ -5,5 +5,5 @@ import showOrderProductsValidator from '../../Middleweres/Order_Products/show.mi
 
 const orderProductsRoute = Router();
 orderProductsRoute.route('/').post(createOrderProductsValidator,createOrderProducts).get(indexOrderProducts);
-orderProductsRoute.route('/:id').get(showOrderProductsValidator,showOrderProducts);
+orderProductsRoute.route('/:orderId/product/:productId').get(showOrderProductsValidator,showOrderProducts);
 export default orderProductsRoute;

@@ -11,7 +11,7 @@ const createOrder = async (
     next: NextFunction
 )=> {
     try {
-        const order = await model.createOrder(res.locals.order);
+        const order = await model.create(res.locals.order);
         return res.json(successResponse({ data: order }));
     } catch (error) {
         next(error);
@@ -24,7 +24,7 @@ const indexOrders = async (
     next: NextFunction
 )=> {
     try {
-        const orders = await model.indexOrders();
+        const orders = await model.index();
         return res.json(successResponse({ data: orders }));
     } catch (error) {
         next(error);
@@ -37,7 +37,7 @@ const showOrder = async (
     next: NextFunction
 )=> {
     try {
-        const Order = await model.showOrder(res.locals.id);
+        const Order = await model.show(res.locals.id);
         return res.json(successResponse({ data: Order }));
     } catch (error) {
         next(error);

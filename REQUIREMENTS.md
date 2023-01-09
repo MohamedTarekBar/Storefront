@@ -40,3 +40,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+
+
+                "SELECT u.email,count(p.name) as count, sum(p.price) as total, json_agg( json_build_object( 'orderId', o.id, 'price', p.price, 'name', Lower(p.name), 'qty', op.qty ) ) AS products from order_products as op Left join orders as o on op.order_id = o.id Left join products as p on op.product_id = p.id Left join users as u on o.user_id = u.id group by u.email";
+
+            `SELECT 
+            op.order_id,
+            op.product_id,
+            op.qty,
+            p.name,
+            p.price
+            FROM order_products AS op
+            JOIN products AS p ON p.id=op.product_id WHERE op.order_id=$1 AND op.product_id=$2`;
+            

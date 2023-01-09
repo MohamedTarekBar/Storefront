@@ -16,7 +16,7 @@ class UserModel {
         };
     };
 
-    createUser = async (user: User) => {
+    create = async (user: User) => {
         try {
             const sql =
                 'INSERT INTO users (first_name, last_name, email, password) values ($1,$2,Lower($3),$4) returning *';
@@ -37,7 +37,6 @@ class UserModel {
                 throw sendErr(Side.database, constants.default.unexpectedError);
             }
         } catch (error) {
-            console.log((error as Error).message);
             // eslint-disable-next-line quotes
             if ((error as Error).message.includes("duplicate key value violates unique constraint \"users_email_key\"")) {
                 throw sendErr(Side.database, constants.user.email.unique);
@@ -46,7 +45,7 @@ class UserModel {
         }
     };
 
-    authUser = async (user: User) => {
+    auth = async (user: User) => {
         try {
             const sql = 'SELECT * from users WHERE email=$1';
             const result = await connect.result(sql, [user.email]);
@@ -82,7 +81,7 @@ class UserModel {
         }
     };
 
-    indexUsers = async (): Promise<User[]> => {
+    index = async (): Promise<User[]> => {
         try {
             const sql = 'SELECT * from users';
             const result = await connect.result(sql);
@@ -99,17 +98,70 @@ class UserModel {
             throw sendErr(Side.database, error);
         }
     };
-    showUser = async (id: number): Promise<User> => {
+    show = async (id: number): Promise<User> => {
         try {
             const sql = 'SELECT * from users WHERE id=$1';
             const result = await connect.result(sql, [id]);
             if (result.rows.length) {
-                return result.rows[0];
+                return this.getUser(result.rows[0]);
             } else {
                 throw sendErr(Side.database, constants.default.noDataFound);
             }
         } catch (error) {
             throw sendErr(Side.database, error);
+        }
+    };
+    delete = async(id: number): Promise<User> => {
+        try {
+            const sql = 'DELETE FROM users WHERE id=$1 RETURNING *';
+            const result = await connect.result(sql, [id]);
+            if (result.rows.length) {
+                return this.getUser(result.rows[0]);
+            } else {
+                throw sendErr(Side.database, constants.default.noDataFound);
+            }
+        } catch (err) {
+            throw sendErr(Side.database, err);
+        }
+    };
+
+    update = async(user: User): Promise<User> => {
+        try {
+            const sql = 'Update users SET first_name=$1, last_name=$2, email=$3 WHERE id=$4 RETURNING *';
+            const defaultUser = await this.show(user.id as number);
+            const result = await connect.result(sql,[
+                user.firstName || defaultUser.firstName,
+                user.lastName || defaultUser.lastName,
+                user.email || defaultUser.email,
+                user.id
+            ]);
+            if (result.rows.length) {
+                return this.getUser(result.rows[0]);
+            } else {
+                throw sendErr(Side.database, constants.default.noDataFound);
+            }
+        } catch (err) {
+            throw sendErr(Side.database, err);
+        }
+    };
+
+    changePassword = async(user: User):Promise<User> => {
+        try {
+            const sql = 'Update users SET password=$1 WHERE id=$2 RETURNING *';
+            const hash = await CryptPassword.hashPassword(
+                user.password as string
+            );
+            const result = await connect.result(sql,[
+                hash,
+                user.id
+            ]);
+            if (result.rows.length) {
+                return this.getUser(result.rows[0]);
+            } else {
+                throw sendErr(Side.database, constants.default.noDataFound);
+            }
+        } catch (err) {
+            throw sendErr(Side.database, err);
         }
     };
 }
