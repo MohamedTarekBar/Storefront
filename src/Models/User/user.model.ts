@@ -19,7 +19,7 @@ class UserModel {
     createUser = async (user: User) => {
         try {
             const sql =
-                'INSERT INTO users (first_name, last_name, email, password) values ($1,$2,$3,$4) returning *';
+                'INSERT INTO users (first_name, last_name, email, password) values ($1,$2,Lower($3),$4) returning *';
             const hash = await CryptPassword.hashPassword(
                 user.password as string
             );

@@ -4,5 +4,5 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS public.orders(
     id SERIAL PRIMARY KEY,
     status status default 'active',
-    user_Id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+    user_Id int NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );

@@ -23,11 +23,11 @@ const createOrderValidator = (
         try {
             const user = token.decode(res.locals.token);
             if ((user as User).id) {
-                console.log(user);
                 const order: Order = {
                     status: req.body.status.trim().toLowerCase(),
                     userId: ((user as User).id) as number
                 };
+                console.log(((user as User).id));
                 res.locals.order = order;
                 next();
             } else {

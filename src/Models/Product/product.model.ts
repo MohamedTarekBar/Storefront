@@ -5,12 +5,16 @@ import sendErr, { Side } from '../../Utils/sendError.utils';
 
 class ProductModel {
     createProduct = async (product: Product): Promise<Product> => {
-        console.log(product);
         try {
             const sql = 'INSERT INTO products (name, price) values ($1,$2) returning *';
             const result = await connect.result(sql,[product.name,product.price]);
             if(result.rows.length) {
-                return result.rows[0];
+                const p = result.rows[0];
+                return {
+                    id: p.id,
+                    name: p.name,
+                    price: (parseFloat(p.price)) as unknown as number
+                };
             } else {
                 throw sendErr(Side.database, constants.default.noDataFound);
             }

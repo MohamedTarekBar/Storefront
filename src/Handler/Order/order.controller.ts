@@ -11,9 +11,7 @@ const createOrder = async (
     next: NextFunction
 )=> {
     try {
-        console.log(res.locals.order);
         const order = await model.createOrder(res.locals.order);
-        console.log(order);
         return res.json(successResponse({ data: order }));
     } catch (error) {
         next(error);

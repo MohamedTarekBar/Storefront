@@ -5,8 +5,8 @@ import sendErr, { Side } from '../../Utils/sendError.utils';
 import OrderProducts from '../../types/OrderProducts.type';
 
 const createOrderProductsValidator = (
-    res: Response,
     req: Request,
+    res: Response,
     next: NextFunction
 ) => {
     const validation = Joi.object({
@@ -23,15 +23,13 @@ const createOrderProductsValidator = (
             .required()
             .error(new Error(constants.order.qty.valid)),
     }).validate(req.body, { abortEarly: false }).error?.message;
-
-    console.log(req.body);
     if (validation) {
         throw sendErr(Side.validation, validation);
     } else {
         const orderProducts: OrderProducts = {
-            orderId: req.body.orderId.trim(),
-            productId: req.body.productId.trim(),
-            qty: req.body.qty.trim(),
+            orderId: req.body.orderId,
+            productId: req.body.productId,
+            qty: req.body.qty,
         };
         res.locals.orderProducts = orderProducts;
         next();
