@@ -29,7 +29,11 @@ if (NODE_ENV === 'dev') {
         password: POSTGRES_PASSWORD,
     });
 } else {
-    console.log('error');
+    console.log('error /config');
 }
+
+client.on('error',(error)=>{
+    console.log(error + '/from database');
+});
 
 export default client;

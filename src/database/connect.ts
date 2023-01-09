@@ -1,5 +1,4 @@
 import client from './database';
-
 export default new (class Connect {
     async result(query: string, options?: unknown[] | undefined) {
         try {
@@ -8,7 +7,7 @@ export default new (class Connect {
             connection.release();
             return result;
         } catch (error) {
-            throw new Error(`${error as Error} from connection`);
+            throw new Error(`${error as Error} /database`);
         }
     }
 })();

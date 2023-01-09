@@ -1,3 +1,0 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE TABLE IF NOT EXISTS public.users ( uid uuid NOT NULL DEFAULT uuid_generate_v4(), email character varying(50) UNIQUE, user_name character varying(50) NOT NULL UNIQUE, first_name character varying(50) NOT NULL, last_name character varying(50) NOT NULL, password character varying(255) NOT NULL, token text, CONSTRAINT users_pkey PRIMARY KEY (uid), CONSTRAINT users_email_key UNIQUE (email));

@@ -6,16 +6,15 @@
   "author": "Udacity",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "test": "npm run build && export NODE_ENV=test || set NODE_ENV=test || NODE_ENV=test && db-migrate up && jasmine && db-migrate reset",
-    "eslint:check": "eslint 'src/**/*.ts'",
-    "eslint:fix": "eslint 'src/**/*.ts' --fix",
-    "prettier:check": "prettier --config .prettierrc --check src/**/*.ts",
-    "prettier:fix": "prettier --config .prettierrc --write src/**/*.ts",
-    "clean": "rimraf build/",
-    "build": "yarn clean && npx tsc",
-    "db-up": "db-migrate up",
-    "start_test":" export NODE_ENV=test || set NODE_ENV=test || NODE_ENV=test && nodemon src/index.ts"
+    "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./build --onSuccess \"node ./build/index.js\"",
+    "build": "tsc",
+    "start": "tsc && node build/index.js",
+    "migration": "db-migrate",
+    "jasmine": "jasmine-ts  --config=./spec/support/jasmine.json",
+    "test": "export NODE_ENV=test  && db-migrate up --config ./database.json -e test && tsc && yarn jasmine && db-migrate down",
+    "lint": "eslint . --ext .ts",
+    "format": "yarn lint --fix",
+    "dev:start": "nodemon src/index.ts"
   },
   "keywords": [],
   "dependencies": {
@@ -26,6 +25,7 @@
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^10.0.0",
     "express": "^4.18.2",
+    "helmet": "^6.0.1",
     "http-status-codes": "^2.2.0",
     "jasmine": "^3.99.0",
     "jasmine-spec-reporter": "^7.0.0",
@@ -55,4 +55,5 @@
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
-  }}
+  }
+}

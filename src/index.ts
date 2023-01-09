@@ -1,30 +1,24 @@
-import express,{Request,Response} from 'express';
-import bodyParser from 'body-parser';
-
-import * as utils from './Utils/commonImports';
-import config from './Configs/config';
-
-const app = express();
-const PORT = config.port || 3000;
-
-app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-app.use('/api',utils.apiRoute);
-
-app.get('/', (req: Request,res: Response) => {
-    res.redirect('https://documenter.getpostman.com/view/13127908/2s8Z75SV4j');
+import express, { Application } from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import helmet from 'helmet';
+import api from './Routes';
+import errorMiddlewere from './Middleweres/error.middleware';
+import sendErr, { Side } from './Utils/sendError.utils';
+import constants from './Utils/errorConstants.utils';
+const app: Application = express();
+const PORT = process.env.PORT || 3000;
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors());
+app.use(helmet());
+app.use('/api', api);
+app.use(()=>{
+    throw sendErr(Side.page404,constants.default.pageNotFound);
 });
-
-app.use(() => {
-    throw utils.errorResponse.json(utils.ErrorSide.page404);
-});
-
-app.use(utils.errorMiddlewere);
-
+app.use(errorMiddlewere);
 app.listen(PORT, () => {
-    console.log(`app is listen to http://localhost:${PORT}`);
+    const server = '::::3000';
+    console.log('app is running on' + server);
 });
-
-
 export default app;
