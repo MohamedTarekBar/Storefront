@@ -13,7 +13,8 @@
     "tsc": "tsc",
     "prettier": "prettier --config .prettierrc --check src/**/*.ts && prettier --write src/**/*.ts",
     "lint": "eslint  'src/**/*.ts' ",
-    "fixlint": "eslint  'src/**/*.ts' --fix"
+    "fixlint": "eslint  'src/**/*.ts' --fix",
+    "setup": "npm i ; touch .env ; db-migrate up ; npm run dev"
   },
   "keywords": [],
   "dependencies": {

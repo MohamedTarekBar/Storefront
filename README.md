@@ -52,3 +52,27 @@ Add JWT functionality as shown in the course. Make sure that JWTs are required f
 Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
 
 Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+
+
+
+### QA
+
+## How To Start ? 
+first of all create your database and spare database for test;
+
+run this script `npm run setup` it will install all packages and create blank env file if u are not using mac os
+
+run `npm install; db-migrate up; npm run dev` and add below code to env file first 
+
+PORT=3000
+NODE_ENV=dev
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=
+POSTGRES_DB_TEST=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+BYCRYPT_PASSWORD=secret_key
+SALT_ROUNDS=10
+TOKEN_SECRET=secret_key
+
