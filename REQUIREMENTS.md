@@ -48,7 +48,7 @@ ________________________________________________________________________________
 [shapes](#shapes) 😶‍🌫️
 
 
-### endpoints - 
+### endpoints
 [1][doc link](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
 ### [users] {
 - Create **`token not required`** 
