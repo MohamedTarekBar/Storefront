@@ -1,10 +1,24 @@
+/* eslint-disable no-useless-escape */
 import supertest from 'supertest';
 import app from '../server';
-
-// create a request object
 const request = supertest(app);
+let token: string | undefined = undefined;
 
 describe('Test Endpoints', () => {
+    beforeAll(async () => {
+        const user = {
+            firstName: 'Mohamed',
+            lastName: 'Tarek',
+            email: 'Mohamed@yahoo.com',
+            password: 'Aa112233!',
+        };
+        await request.post('/api/users').send(user);
+        const auth = await request
+            .post('/api/users/auth')
+            .send({ email: user.email, password: user.password });
+        token = auth.body.data.token;
+    });
+
     it('Found redirect to api document_postman ', async () => {
         const server = await request.get('/');
         const api = await request.get('/api');
@@ -23,19 +37,36 @@ describe('Test Endpoints', () => {
         expect(order_products.status).toBe(403);
     });
 
+    it('Testing routes with valid token', async () => {
+        await request
+            .get('/api/users')
+            .set('Authorization', 'bearer ' + token)
+            .expect(200);
+        const orders = await request.get('/api/orders').set('Authorization', 'bearer ' + token).expect(502);
+        expect(orders.body.message === 'no data found').toBeTruthy();
+    });
+
+    it('Testing routes with invalid token', async () => {
+        const token =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+        await request
+            .get('/api/users')
+            .set('Authorization', 'bearer ' + token)
+            .expect(403);
+    });
+
+    it('Testing routes with incorrect token type', async () => {
+        const token = 'fake';
+        await request
+            .get('/api/users')
+            .set('Authorization', 'bearer ' + token)
+            .expect(403);
+    });
+
     it('Testing create user endpoint without passing user object', async () => {
         const users = await request.post('/api/users');
         expect(users.status).toBe(400);
     });
-
-    it('Testing create user endpoint with passing user object', async () => {
-        const user = {
-            firstName: 'Mohamed',
-            lastName: 'Tarek',
-            email: 'Mohamed@yahoo.com',
-            password: 'Aa112233!',
-        };
-        const create = await request.post('/api/users').send(user);
-        expect(create.status).toBe(200);
-    });
 });
+
+export { token };

@@ -9,7 +9,7 @@ import constants from './Utils/errorConstants.utils';
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'test' }));
 app.use(cors());
 app.use(helmet());
 app.use('/api', api);
