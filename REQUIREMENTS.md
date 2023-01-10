@@ -334,8 +334,8 @@ ________________________________________________________________________________
 
 - index **`token required`** 
     - HTTP verb `GET`
-    - Endpoint:- `/api/users/`
-    - Response Body -- `User object`
+    - Endpoint:- `/api/order-products/`
+    - Response Body -- `custom order-products object`
 
     ```json
         {
