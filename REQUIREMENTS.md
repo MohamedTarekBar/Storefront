@@ -42,14 +42,14 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 
 ________________________________________________________________________________________________________________
-[Managed Disks](#api-requirements) 🤦🏻‍♂️
-[Managed Disks](#endpoints) 🫣
-[Managed Disks](#scheme) 😱
-[Managed Disks](#shapes) 😶‍🌫️
+[requirements](#api-requirements) 🤦🏻‍♂️
+[endpoints](#endpoints) 🫣
+[scheme](#scheme) 😱
+[shapes](#shapes) 😶‍🌫️
 
 
 ### endpoints - 
-[1][Managed Disks](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
+[1][doc link](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
 ### [users] {
     - Create **`token not required`** 
     - HTTP verb `POST`
@@ -127,7 +127,7 @@ ________________________________________________________________________________
             }
         }
     ```
-    
+
 - index **`token required`** 
     - HTTP verb `GET`
     - Endpoint:- `/api/users/`
@@ -156,4 +156,4 @@ ________________________________________________________________________________
 ### shapes - 
 
 ### get_postman_documentation_link
-    - https://documenter.getpostman.com/view/13127908/2s8Z76uUSG
+    [Documentation Link](#https://documenter.getpostman.com/view/13127908/2s8Z76uUSG)
