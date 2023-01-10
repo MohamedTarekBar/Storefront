@@ -49,8 +49,8 @@ ________________________________________________________________________________
 
 
 ### endpoints
-[1][doc link](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
-### [users] {
+### `/` or ` /api ` GET will redirect to postman documentaion, POST WILL BE 404
+### [ users ] {
 - Create **`token not required`** 
     - HTTP verb `POST`
     - Endpoint:- `/api/users`
@@ -144,9 +144,72 @@ ________________________________________________________________________________
         }
     ```
 }
-### [orders] {
+### [ orders ] {
+- Create **`token required`** 
+    - HTTP verb `POST`
+    - Endpoint:- `/api/orders`
+    - userId:- `will extract from token`
+    - Request Body -- `Order object`
+        ```json
+            {
+                "status": "active"
+            }
+        ```
+    - Response Body -- `Order object`
 
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 8,
+                "status": "active",
+                "user_id": 3
+            }
+        }
+    ```
+- show **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/orders/:id`
+    - params:- `id`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 7,
+                "status": "active",
+                "user_id": 3
+            }
+        }
+    ```
+
+- index **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/users/`
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": [
+                {
+                    "id": 7,
+                    "status": "active",
+                    "user_id": 3
+                },
+                {
+                    "id": 8,
+                    "status": "active",
+                    "user_id": 3
+                }
+            ]
+        }
+    ```
 }
+
 ### scheme - 
 
 ### shapes - 
