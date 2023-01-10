@@ -54,8 +54,7 @@ ________________________________________________________________________________
     - Create **`token not required`** 
     - HTTP verb `POST`
     - Endpoint:- `/api/users`
-    - Request Body
-
+    - Request Body -- `User object`
         ```json
             {
                 "email": "Mohamed@Yahoo.com",
@@ -64,7 +63,6 @@ ________________________________________________________________________________
                 "lastName": "tarek"
             }
         ```
-
     - Response Body -- `User object`
 
     ```json
@@ -84,7 +82,6 @@ ________________________________________________________________________________
     - Authenticate **`token not required`** 
     - HTTP verb `POST`
     - Endpoint:- `/api/users/auth`
-    - Request Body
 
         ```json
         {
@@ -113,7 +110,6 @@ ________________________________________________________________________________
     - HTTP verb `GET`
     - Endpoint:- `/api/users/:id`
     - params:- `id`
-    - Response Body -- `User object`
 
     ```json
         {
@@ -156,4 +152,4 @@ ________________________________________________________________________________
 ### shapes - 
 
 ### get_postman_documentation_link
-    [Documentation Link](#https://documenter.getpostman.com/view/13127908/2s8Z76uUSG)
+    https://documenter.getpostman.com/view/13127908/2s8Z76uUSG
