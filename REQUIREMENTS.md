@@ -41,3 +41,119 @@ These are the notes from a meeting with the frontend developer that describe wha
 - status of order (active or complete)
 
 
+________________________________________________________________________________________________________________
+[Managed Disks](#api-requirements) 🤦🏻‍♂️
+[Managed Disks](#endpoints) 🫣
+[Managed Disks](#scheme) 😱
+[Managed Disks](#shapes) 😶‍🌫️
+
+
+### endpoints - 
+[1][Managed Disks](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
+### [users] {
+    - Create **`token not required`** 
+    - HTTP verb `POST`
+    - Endpoint:- `/api/users`
+    - Request Body
+
+        ```json
+            {
+                "email": "Mohamed@Yahoo.com",
+                "password": "Mohamed123@",
+                "firstName": "Mohamed",
+                "lastName": "tarek"
+            }
+        ```
+
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 4,
+                "email": "mohamed@yahoo.com",
+                "firstName": "Mohamed",
+                "lastName": "tarek",
+                "token": null
+            }
+        }
+    ```
+
+    - Authenticate **`token not required`** 
+    - HTTP verb `POST`
+    - Endpoint:- `/api/users/auth`
+    - Request Body
+
+        ```json
+            {
+                "email": "Mohamed@Yahoo.com",
+                "password": "Mohamed123@",
+            }
+        ```
+
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 4,
+                "email": "mohamed@yahoo.com",
+                "firstName": "Mohamed",
+                "lastName": "tarek",
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJtb2hhbWVkQHlhaG9vLmNvbSIsImZpcnN0TmFtZSI6Ik1vaGFtZWQiLCJsYXN0TmFtZSI6InRhcmVrIiwiaWF0IjoxNjczMzY4Njk1fQ.6QKSjrWfhWDREq7hNlKl0ByArdcQq2LoS0rk9DFNG98"
+            }
+        }
+    ```
+
+- show **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/users/:id`
+    - params:- `id`
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 4,
+                "email": "mo@yahoo.com",
+                "firstName": "Mohamed",
+                "lastName": "tarek"
+            }
+        }
+    ```
+    
+- index **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/users/`
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": [
+                {
+                    "id": 4,
+                    "email": "mo@yahoo.com",
+                    "firstName": "Mohamed",
+                    "lastName": "tarek"
+                }
+            ]
+        }
+    ```
+}
+### [orders] {
+
+}
+### scheme - 
+
+### shapes - 
+
+### get_postman_documentation_link
+    - https://documenter.getpostman.com/view/13127908/2s8Z76uUSG

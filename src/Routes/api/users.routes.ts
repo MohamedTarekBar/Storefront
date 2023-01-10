@@ -9,11 +9,11 @@ import {
     updateUser,
 } from '../../Handler/User/user.controller';
 import authenticationMiddleware from '../../Middleweres/authentication.middleware';
-import showUserValidator from '../../Middleweres/Order_Products/show.middlewere';
 import authUserValidator from '../../Middleweres/User/auth.middleware';
 import changePasswordUserValidator from '../../Middleweres/User/changePassword.middleware';
 import createUserValidator from '../../Middleweres/User/create.middleware';
 import deleteUserValidator from '../../Middleweres/User/delete.middleware';
+import showUserValidator from '../../Middleweres/User/show.middleware';
 import updateUserValidator from '../../Middleweres/User/update.middleware';
 
 const userRoute = Router();
