@@ -68,17 +68,17 @@ ________________________________________________________________________________
     - Response Body -- `User object`
 
     ```json
-        {
-            "status": 200,
-            "message": "success",
-            "data": {
-                "id": 4,
-                "email": "mohamed@yahoo.com",
-                "firstName": "Mohamed",
-                "lastName": "tarek",
-                "token": null
-            }
+    {
+        "status": 200,
+        "message": "success",
+        "data": {
+            "id": 4,
+            "email": "mohamed@yahoo.com",
+            "firstName": "Mohamed",
+            "lastName": "tarek",
+            "token": null
         }
+    }
     ```
 
     - Authenticate **`token not required`** 
@@ -87,26 +87,26 @@ ________________________________________________________________________________
     - Request Body
 
         ```json
-            {
-                "email": "Mohamed@Yahoo.com",
-                "password": "Mohamed123@",
-            }
+        {
+            "email": "Mohamed@Yahoo.com",
+            "password": "Mohamed123@",
+        }
         ```
 
     - Response Body -- `User object`
 
     ```json
-        {
-            "status": 200,
-            "message": "success",
-            "data": {
-                "id": 4,
-                "email": "mohamed@yahoo.com",
-                "firstName": "Mohamed",
-                "lastName": "tarek",
-                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJtb2hhbWVkQHlhaG9vLmNvbSIsImZpcnN0TmFtZSI6Ik1vaGFtZWQiLCJsYXN0TmFtZSI6InRhcmVrIiwiaWF0IjoxNjczMzY4Njk1fQ.6QKSjrWfhWDREq7hNlKl0ByArdcQq2LoS0rk9DFNG98"
-            }
+    {
+        "status": 200,
+        "message": "success",
+        "data": {
+            "id": 4,
+            "email": "mohamed@yahoo.com",
+            "firstName": "Mohamed",
+            "lastName": "tarek",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJtb2hhbWVkQHlhaG9vLmNvbSIsImZpcnN0TmFtZSI6Ik1vaGFtZWQiLCJsYXN0TmFtZSI6InRhcmVrIiwiaWF0IjoxNjczMzY4Njk1fQ.6QKSjrWfhWDREq7hNlKl0ByArdcQq2LoS0rk9DFNG98"
         }
+    }
     ```
 
 - show **`token required`** 
