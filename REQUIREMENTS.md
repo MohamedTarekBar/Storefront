@@ -209,7 +209,162 @@ ________________________________________________________________________________
         }
     ```
 }
+### [ products ] {
+- Create **`token required`** 
+    - HTTP verb `POST`
+    - Endpoint:- `/api/products`
+    - Request Body -- `Product object`
+        ```json
+            {
+                "name": "iphone 14 Pro Max",
+                "price": 2112.22
+            }
+        ```
+    - Response Body -- `Product object`
 
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 12,
+                "name": "iphone 14 pro max",
+                "price": 2112.22
+            }
+        }
+    ```
+- show **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/products/:id`
+    - params:- `id`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 11,
+                "name": "iphone 14 pro max",
+                "price": "2112.22"
+            }
+        }
+    ```
+
+- index **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/users/`
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": [
+                {
+                    "id": 4,
+                    "name": "iphone 14 pro max",
+                    "price": "2112.00"
+                },
+                {
+                    "id": 5,
+                    "name": "iphone 14 pro max",
+                    "price": "2112.00"
+                },
+                {
+                    "id": 6,
+                    "name": "iphone 14 pro max",
+                    "price": "2112.00"
+                },
+            ]
+        }
+    ```
+### [ order-products ] {
+- Create **`token required`** 
+    - HTTP verb `POST`
+    - Endpoint:- `/api/order-products`
+    - Request Body -- `orderProducts object`
+        ```json
+            {
+                "orderId": 7,
+                "productId": 11,
+                "qty": 18
+            }
+        ```
+    - Response Body -- `orderProducts object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": {
+                "id": 23,
+                "orderId": 7,
+                "productId": 11,
+                "qty": 18
+            }
+        }
+    ```
+- show **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/order-products/:opid/product/pid`
+    - params:- `opid,pid`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": [
+                {
+                    "order": 7,
+                    "product": 4,
+                    "qty": 18,
+                    "name": "iphone 14 pro max",
+                    "price": "2112.00"
+                },
+                {
+                    "order": 7,
+                    "product": 4,
+                    "qty": 5,
+                    "name": "iphone 14 pro max",
+                    "price": "2112.00"
+                },
+            ]
+        }
+    ```
+
+- index **`token required`** 
+    - HTTP verb `GET`
+    - Endpoint:- `/api/users/`
+    - Response Body -- `User object`
+
+    ```json
+        {
+            "status": 200,
+            "message": "success",
+            "data": [
+                {
+                    "email": "mo@yahoo.com",
+                    "count": "8",
+                    "total": "16896.44",
+                    "products": [
+                        {
+                            "orderId": 7,
+                            "price": 2112,
+                            "name": "iphone 14 pro max",
+                            "qty": 18
+                        },
+                        {
+                            "orderId": 7,
+                            "price": 2112,
+                            "name": "iphone 14 pro max",
+                            "qty": 5
+                        }
+                    ]
+                }
+            ]
+        }
+    ```
+}
 ### scheme - 
 
 ### shapes - 
