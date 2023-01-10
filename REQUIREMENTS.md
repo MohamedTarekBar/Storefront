@@ -51,7 +51,7 @@ ________________________________________________________________________________
 ### endpoints - 
 [1][doc link](#get_postman_documentation_link) '('/api') OR ('/')' GET POST WILL BE 404
 ### [users] {
-    - Create **`token not required`** 
+- Create **`token not required`** 
     - HTTP verb `POST`
     - Endpoint:- `/api/users`
     - Request Body -- `User object`
@@ -79,7 +79,7 @@ ________________________________________________________________________________
     }
     ```
 
-    - Authenticate **`token not required`** 
+- Authenticate **`token not required`** 
     - HTTP verb `POST`
     - Endpoint:- `/api/users/auth`
 
