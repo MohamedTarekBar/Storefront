@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import constants from '../Utils/errorConstants.utils';
 import sendErr, { Side } from '../Utils/sendError.utils';
 import token from '../Utils/token.utils';
-const authenticationMiddlewere = (
+const authenticationMiddleware = (
     req: Request,
     res: Response,
     next: NextFunction
@@ -31,4 +31,4 @@ const authenticationMiddlewere = (
     }
 };
 
-export default authenticationMiddlewere;
+export default authenticationMiddleware;

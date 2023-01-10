@@ -14,14 +14,14 @@ app.use(cors());
 app.use(helmet());
 app.use('/api', api);
 app.get('/', (_req: Request, res: Response) => {
-    res.redirect('https://documenter.getpostman.com/view/13127908/2s8Z76uUSG');
+    res.status(200).redirect('https://documenter.getpostman.com/view/13127908/2s8Z76uUSG');
 });
 app.use(() => {
     throw sendErr(Side.page404, constants.default.pageNotFound);
 });
 app.use(errorMiddlewere);
 app.listen(PORT, () => {
-    const server = 'localhost:3000';
-    console.log('app is running on' + server);
+    const server = 'http://localhost:3000';
+    console.log(`app is running on ${server} -- ${process.env.NODE_ENV}`);
 });
 export default app;

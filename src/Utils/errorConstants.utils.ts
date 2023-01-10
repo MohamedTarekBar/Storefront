@@ -72,7 +72,7 @@ const constants = {
     token: {
         verify: 'Token Not Verified',
         provide: 'Authorization Not Provided',
-        decode: 'Failed tto decode User'
+        decode: 'Failed tto decode User',
     },
     hash: {
         hashing: 'Failed to Hash Password',
@@ -85,7 +85,7 @@ const constants = {
         unexpectedError: 'Unexpected error',
         security: 'security face error',
         pageNotFound: 'page 404 not found',
-        noDataFound: 'no data found'
+        noDataFound: 'no data found',
     },
 };
 

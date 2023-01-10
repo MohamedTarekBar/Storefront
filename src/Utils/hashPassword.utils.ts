@@ -10,10 +10,16 @@ class CryptPassword {
                 const salt = parseInt(config.salt as string, 10);
                 return bycrypt.hashSync(`${password}${config.pepper}`, salt);
             } catch (error) {
-                throw sendErr(Side.validation, constants.hash.hashing + ',hash');
+                throw sendErr(
+                    Side.validation,
+                    constants.hash.hashing + ',hash'
+                );
             }
         } else {
-            throw sendErr(Side.validation, constants.user.password.required + ',hash');
+            throw sendErr(
+                Side.validation,
+                constants.user.password.required + ',hash'
+            );
         }
     }
 
@@ -25,10 +31,16 @@ class CryptPassword {
                     hashedPassword
                 );
             } catch (error) {
-                throw sendErr(Side.validation, constants.hash.compare + ',hash');
+                throw sendErr(
+                    Side.validation,
+                    constants.hash.compare + ',hash'
+                );
             }
         } else {
-            throw sendErr(Side.validation, constants.user.password.required + ',hash');
+            throw sendErr(
+                Side.validation,
+                constants.user.password.required + ',hash'
+            );
         }
     }
 }

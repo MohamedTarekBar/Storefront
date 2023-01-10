@@ -3,7 +3,6 @@ import Error from '../interface/error.interface';
 import { getStatusCode } from 'http-status-codes';
 import constants from './errorConstants.utils';
 
-
 enum Side {
     validation,
     server,
@@ -42,16 +41,12 @@ const sendErr = (
         case Side.page404:
             return {
                 status: getStatusCode('Not Found') || 404,
-                message: msg
-                    ? msg
-                    : constants.default.unexpectedError,
+                message: msg ? msg : constants.default.unexpectedError,
             };
         case Side.service:
             return {
                 status: getStatusCode('Service Unavailable') || 503,
-                message: msg
-                    ? msg
-                    : constants.default.pageNotFound,
+                message: msg ? msg : constants.default.pageNotFound,
             };
         default:
             return {
@@ -77,6 +72,5 @@ const error = (
     } else return undefined;
 };
 
-
 export default sendErr;
-export {Side};
+export { Side };

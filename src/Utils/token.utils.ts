@@ -7,10 +7,7 @@ class Token {
     getToken(o: object) {
         if (o) {
             try {
-                const token = jwt.sign(
-                    o,
-                    config.token as unknown as string
-                );
+                const token = jwt.sign(o, config.token as unknown as string);
                 return token;
             } catch (error) {
                 throw sendErr(Side.security, error + ',token');
@@ -29,7 +26,6 @@ class Token {
             return ver;
         } catch (error) {
             throw sendErr(Side.security, error + ',token');
-
         }
     }
 
@@ -37,10 +33,13 @@ class Token {
         if (token) {
             try {
                 const result = jwt.decode(token);
-                if(result !== null) {
+                if (result !== null) {
                     return result;
                 } else {
-                    throw sendErr(Side.security, constants.token.verify + ',token');
+                    throw sendErr(
+                        Side.security,
+                        constants.token.verify + ',token'
+                    );
                 }
             } catch (error) {
                 throw sendErr(Side.security, error + ',token');

@@ -3,6 +3,6 @@ type OrderProducts = {
     orderId: number;
     productId: number;
     qty?: number;
-}
+};
 
 export default OrderProducts;

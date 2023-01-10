@@ -32,7 +32,7 @@ if (NODE_ENV === 'dev') {
     console.log('error /config');
 }
 
-client.on('error',(error)=>{
+client.on('error', (error) => {
     console.log(error + '/from database');
 });
 

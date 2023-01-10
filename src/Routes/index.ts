@@ -13,4 +13,3 @@ api.use('/orders', authenticationMiddleware, orderRoute);
 api.use('/order-products', authenticationMiddleware, orderProductsRoute);
 
 export default api;
- 

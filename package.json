@@ -2,19 +2,18 @@
   "name": "storefront_backend",
   "version": "0.1.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server",
   "author": "Udacity",
   "license": "ISC",
   "scripts": {
-    "watch": "tsc-watch --esModuleInterop src/index.ts --outDir ./build --onSuccess \"node ./build/index.js\"",
-    "build": "tsc",
-    "start": "tsc && node build/index.js",
-    "migration": "db-migrate",
-    "jasmine": "jasmine-ts  --config=./spec/support/jasmine.json",
-    "test": "export NODE_ENV=test  && db-migrate up --config ./database.json -e test && tsc && yarn jasmine && db-migrate down",
-    "lint": "eslint . --ext .ts",
-    "format": "yarn lint --fix",
-    "dev:start": "nodemon src/index.ts"
+    "start": "npm run build && node build/server.js",
+    "dev": "nodemon src/server.ts",
+    "test": "npm run build && export NODE_ENV=test|| set NODE_ENV=test|| NODE_ENV=test&& db-migrate up --env test&& jasmine-ts &&db-migrate reset --env test",
+    "build": "tsc --build",
+    "tsc": "tsc",
+    "prettier": "prettier --config .prettierrc --check src/**/*.ts && prettier --write src/**/*.ts",
+    "lint": "eslint  'src/**/*.ts' ",
+    "fixlint": "eslint  'src/**/*.ts' --fix"
   },
   "keywords": [],
   "dependencies": {
@@ -33,6 +32,7 @@
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
+    "jasmine-ts": "^0.3.0",
     "supertest": "^6.3.3"
   },
   "devDependencies": {
