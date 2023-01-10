@@ -103,7 +103,9 @@ class UserModel {
             const sql = 'SELECT * from users WHERE id=$1';
             const result = await connect.result(sql, [id]);
             if (result.rows.length) {
-                return this.getUser(result.rows[0]);
+                const user = this.getUser(result.rows[0]);
+                user.token = undefined;
+                return user;
             } else {
                 throw sendErr(Side.database, constants.default.noDataFound);
             }
@@ -111,10 +113,11 @@ class UserModel {
             throw sendErr(Side.database, error);
         }
     };
-    delete = async(id: number): Promise<User> => {
+
+    delete = async(user: User): Promise<User> => {
         try {
-            const sql = 'DELETE FROM users WHERE id=$1 RETURNING *';
-            const result = await connect.result(sql, [id]);
+            const sql = 'DELETE FROM users WHERE id=$1 AND token=$2 RETURNING *';
+            const result = await connect.result(sql, [user.id,user.token]);
             if (result.rows.length) {
                 return this.getUser(result.rows[0]);
             } else {
@@ -127,13 +130,14 @@ class UserModel {
 
     update = async(user: User): Promise<User> => {
         try {
-            const sql = 'Update users SET first_name=$1, last_name=$2, email=$3 WHERE id=$4 RETURNING *';
+            const sql = 'Update users SET first_name=$1, last_name=$2, email=$3 WHERE id=$4 AND token=$5 RETURNING *';
             const defaultUser = await this.show(user.id as number);
             const result = await connect.result(sql,[
                 user.firstName || defaultUser.firstName,
                 user.lastName || defaultUser.lastName,
                 user.email || defaultUser.email,
-                user.id
+                user.id,
+                user.token
             ]);
             if (result.rows.length) {
                 return this.getUser(result.rows[0]);
@@ -147,13 +151,14 @@ class UserModel {
 
     changePassword = async(user: User):Promise<User> => {
         try {
-            const sql = 'Update users SET password=$1 WHERE id=$2 RETURNING *';
+            const sql = 'Update users SET password=$1 WHERE id=$2 AND token=$3 RETURNING *';
             const hash = await CryptPassword.hashPassword(
                 user.password as string
             );
             const result = await connect.result(sql,[
                 hash,
-                user.id
+                user.id,
+                user.token
             ]);
             if (result.rows.length) {
                 return this.getUser(result.rows[0]);

@@ -37,7 +37,6 @@ const showOrderProducts = async (
     next: NextFunction
 )=> {
     try {
-        console.log(res.locals.orderProducts);
         const orderProducts = await model.show(res.locals.orderProducts);
         return res.json(successResponse({ data: orderProducts }));
     } catch (error) {
@@ -45,4 +44,31 @@ const showOrderProducts = async (
     }
 };
 
-export { createOrderProducts, indexOrderProducts, showOrderProducts };
+const editOrderProducts = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+)=> {
+    try {
+        console.log(res.locals.orderProducts);
+        const orderProducts = await model.edit(res.locals.orderProducts);
+        return res.json(successResponse({ data: orderProducts }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteOrderProducts = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+)=> {
+    try {
+        const orderProducts = await model.delete(res.locals.id);
+        return res.json(successResponse({ data: orderProducts }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { createOrderProducts, indexOrderProducts, showOrderProducts, editOrderProducts, deleteOrderProducts };

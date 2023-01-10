@@ -4,12 +4,11 @@ import successResponse from '../../Utils/sendSuccess.utils';
 
 const model = new ProductModel();
 
-
 const createProduct = async (
     _req: Request,
     res: Response,
     next: NextFunction
-)=> {
+) => {
     try {
         const product = await model.create(res.locals.product);
         return res.json(successResponse({ data: product }));
@@ -22,7 +21,7 @@ const indexProducts = async (
     req: Request,
     res: Response,
     next: NextFunction
-)=> {
+) => {
     try {
         const products = await model.index();
         return res.json(successResponse({ data: products }));
@@ -31,11 +30,7 @@ const indexProducts = async (
     }
 };
 
-const showProduct = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-)=> {
+const showProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const Product = await model.show(res.locals.id);
         return res.json(successResponse({ data: Product }));
@@ -44,4 +39,36 @@ const showProduct = async (
     }
 };
 
-export { createProduct, indexProducts, showProduct };
+const editProduct = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const product = await model.edit(res.locals.product);
+        return res.json(successResponse({ data: product }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteProduct = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const product = await model.delete(res.locals.id);
+        return res.json(successResponse({ data: product }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export {
+    createProduct,
+    indexProducts,
+    showProduct,
+    editProduct,
+    deleteProduct,
+};

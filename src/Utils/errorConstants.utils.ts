@@ -2,17 +2,21 @@ const constants = {
     user: {
         email: {
             unique: 'email already used',
-            valid: 'email requried valid',
+            valid: 'email requried a valid input',
             required: 'email is required',
             store: 'not stored in database',
         },
         password: {
-            valid: 'password requried valid',
+            valid: 'password requried a valid input',
             required: 'password is required',
             incorrect: 'password is incorrect',
         },
-        name: {
-            valid: 'name requried valid',
+        firstName: {
+            valid: 'first name requried a valid input',
+            required: 'name is required',
+        },
+        lastName: {
+            valid: 'last name requried a valid input',
             required: 'name is required',
         },
         id: {
@@ -26,11 +30,11 @@ const constants = {
             required: 'id is required',
         },
         name: {
-            valid: 'Name requried valid',
+            valid: 'Name requried a valid input',
             required: 'Name is required',
         },
         price: {
-            valid: 'Price requried valid',
+            valid: 'Price requried a valid input',
             required: 'Price is required',
         },
     },
@@ -39,13 +43,27 @@ const constants = {
             valid: 'Order id requried valid number',
             required: 'id is required',
         },
-        qty: {
-            valid: 'Qty not valid',
-            required: 'Qty is required',
-        },
         status: {
             valid: 'Status not valid (complete or active)',
             required: 'Status is required',
+        },
+    },
+    orderProducts: {
+        id: {
+            valid: 'Order Products id requried valid number',
+            required: 'id is required',
+        },
+        orderId: {
+            valid: 'order not a valid input',
+            required: 'order is required',
+        },
+        productId: {
+            valid: 'product not a valid input',
+            required: 'product is required',
+        },
+        qty: {
+            valid: 'Qty not a valid input',
+            required: 'Qty is required',
         },
     },
     missParams: {

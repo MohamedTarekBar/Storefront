@@ -5,7 +5,7 @@ import successResponse from '../../Utils/sendSuccess.utils';
 const model = new UserModel();
 
 const createUser = async (
-    _req: Request,
+    __req: Request,
     res: Response,
     next: NextFunction
 )=> {
@@ -18,7 +18,7 @@ const createUser = async (
 };
 
 const authUser = async (
-    req: Request,
+    _req: Request,
     res: Response,
     next: NextFunction
 )=> {
@@ -31,7 +31,7 @@ const authUser = async (
 };
 
 const indexUsers = async (
-    req: Request,
+    _req: Request,
     res: Response,
     next: NextFunction
 )=> {
@@ -44,7 +44,7 @@ const indexUsers = async (
 };
 
 const showUser = async (
-    req: Request,
+    _req: Request,
     res: Response,
     next: NextFunction
 )=> {
@@ -56,4 +56,43 @@ const showUser = async (
     }
 };
 
-export { createUser, authUser, indexUsers, showUser };
+const deleteUser = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+)=> {
+    try {
+        const user = await model.delete(res.locals.user);
+        return res.json(successResponse({ data: user }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+const updateUser = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+)=> {
+    try {
+        const user = await model.update(res.locals.user);
+        return res.json(successResponse({ data: user }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+const changeUserPassword = async (
+    _req: Request,
+    res: Response,
+    next: NextFunction
+)=> {
+    try {
+        const user = await model.changePassword(res.locals.user);
+        return res.json(successResponse({ data: user }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { createUser, authUser, indexUsers, showUser, deleteUser, updateUser , changeUserPassword};

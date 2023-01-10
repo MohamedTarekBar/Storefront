@@ -21,7 +21,7 @@ const createOrderProductsValidator = (
         qty: Joi.number()
             .min(0)
             .required()
-            .error(new Error(constants.order.qty.valid)),
+            .error(new Error(constants.orderProducts.qty.valid)),
     }).validate(req.body, { abortEarly: false }).error?.message;
     if (validation) {
         throw sendErr(Side.validation, validation);

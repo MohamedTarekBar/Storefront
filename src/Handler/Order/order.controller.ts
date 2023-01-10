@@ -4,12 +4,11 @@ import successResponse from '../../Utils/sendSuccess.utils';
 
 const model = new OrderModel();
 
-
 const createOrder = async (
     _req: Request,
     res: Response,
     next: NextFunction
-)=> {
+) => {
     try {
         const order = await model.create(res.locals.order);
         return res.json(successResponse({ data: order }));
@@ -18,11 +17,7 @@ const createOrder = async (
     }
 };
 
-const indexOrders = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-)=> {
+const indexOrders = async (_req: Request, res: Response, next: NextFunction) => {
     try {
         const orders = await model.index();
         return res.json(successResponse({ data: orders }));
@@ -31,11 +26,7 @@ const indexOrders = async (
     }
 };
 
-const showOrder = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-)=> {
+const showOrder = async (_req: Request, res: Response, next: NextFunction) => {
     try {
         const Order = await model.show(res.locals.id);
         return res.json(successResponse({ data: Order }));
@@ -44,4 +35,22 @@ const showOrder = async (
     }
 };
 
-export { createOrder, indexOrders, showOrder };
+const editOrder = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+        const Order = await model.edit(res.locals.order);
+        return res.json(successResponse({ data: Order }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteOrder = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+        const order = await model.delete(res.locals.id);
+        return res.json(successResponse({ data: order }));
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { createOrder, indexOrders, showOrder, editOrder, deleteOrder};
