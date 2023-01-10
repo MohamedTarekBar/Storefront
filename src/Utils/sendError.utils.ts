@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 import Error from '../interface/error.interface';
 import { getStatusCode } from 'http-status-codes';

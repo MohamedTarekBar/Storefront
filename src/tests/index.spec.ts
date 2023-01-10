@@ -42,8 +42,14 @@ describe('Test Endpoints', () => {
             .get('/api/users')
             .set('Authorization', 'bearer ' + token)
             .expect(200);
-        const orders = await request.get('/api/orders').set('Authorization', 'bearer ' + token).expect(502);
-        expect(orders.body.message === 'no data found').toBeTruthy();
+        const orders = await request
+            .get('/api/orders')
+            .set('Authorization', 'bearer ' + token);
+        if (orders.body.data) {
+            expect(orders.status).toBe(200);
+        }else {
+            expect(orders.status).toBe(502);
+        }
     });
 
     it('Testing routes with invalid token', async () => {

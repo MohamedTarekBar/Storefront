@@ -47,8 +47,8 @@ class UserModel {
 
     auth = async (user: User) => {
         try {
-            const sql = 'SELECT * from users WHERE email=$1';
-            const result = await connect.result(sql, [user.email]);
+            const sql = 'SELECT * from users WHERE email=Lower($1)';
+            const result = await connect.result(sql, [user.email?.toLowerCase()]);
             if (result.rows.length && result.rows[0].password) {
                 const hashedPassword = result.rows[0].password;
                 const isValidPassword = await CryptPassword.compare(
@@ -57,13 +57,13 @@ class UserModel {
                 );
                 if (isValidPassword) {
                     const sql =
-                        'UPDATE users SET token=$1 WHERE email=$2 RETURNING *';
+                        'UPDATE users SET token=$1 WHERE email=Lower($2) RETURNING *';
                     const userWithoutToken = this.getUser(result.rows[0]);
                     userWithoutToken.token = undefined;
                     const userToken = token.getToken(userWithoutToken);
                     const update = await connect.result(sql, [
                         userToken,
-                        user.email,
+                        user.email?.toLowerCase(),
                     ]);
                     const updatedUser = update.rows[0];
                     return this.getUser(updatedUser);

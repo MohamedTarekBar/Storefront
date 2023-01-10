@@ -5,7 +5,6 @@ import sendErr, { Side } from '../../Utils/sendError.utils';
 
 class OrderModel {
     create = async (order: Order): Promise<Order> => {
-        console.log(order);
         try {
             const sql = 'INSERT INTO orders (user_id, status) values ($1,$2) returning *';
             const result = await connect.result(sql,[order.userId,order.status]);
@@ -17,7 +16,6 @@ class OrderModel {
         } catch (error) {
             // eslint-disable-next-line quotes, no-useless-escape
             if ((error as Error).message.includes(`violates foreign key constraint \"orders_user_id_fkey\"`)){
-                console.log('you must create user first and pass availd user_token stored in database');
                 throw sendErr(Side.security, constants.default.forbidden);
             } else {
                 throw sendErr(Side.database, error);

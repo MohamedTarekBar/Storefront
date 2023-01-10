@@ -5,7 +5,7 @@ const errorMiddlewere = (
     err: Error,
     _req: Request,
     res: Response,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
     _next: NextFunction
 ) => {
     const status = err.status || 500;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 enum orderStatus {
     active,
     complete,
@@ -8,3 +9,4 @@ type Order = {
     status: orderStatus;
 };
 export default Order;
+export { orderStatus };

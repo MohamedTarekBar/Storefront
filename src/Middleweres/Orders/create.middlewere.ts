@@ -27,7 +27,6 @@ const createOrderValidator = (
                     status: req.body.status.trim().toLowerCase(),
                     userId: ((user as User).id) as number
                 };
-                console.log(((user as User).id));
                 res.locals.order = order;
                 next();
             } else {

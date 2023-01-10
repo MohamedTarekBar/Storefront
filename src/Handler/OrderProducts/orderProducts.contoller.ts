@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import OrderProductsModel from '../../Models/OrderProducts/OrderProducts.model';
+import OrderProductsModel from '../../Models/OrderProducts/orderProducts.model';
 import successResponse from '../../Utils/sendSuccess.utils';
 
 const model = new OrderProductsModel();
@@ -50,7 +50,6 @@ const editOrderProducts = async (
     next: NextFunction
 )=> {
     try {
-        console.log(res.locals.orderProducts);
         const orderProducts = await model.edit(res.locals.orderProducts);
         return res.json(successResponse({ data: orderProducts }));
     } catch (error) {

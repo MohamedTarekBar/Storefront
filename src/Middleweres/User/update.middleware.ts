@@ -61,7 +61,6 @@ const updateUserValidator = (
             email: req.body.email ? req.body.email.trim(): undefined,
             token: res.locals.token
         };
-        console.log(user);
         res.locals.user = user;
         next();
     }

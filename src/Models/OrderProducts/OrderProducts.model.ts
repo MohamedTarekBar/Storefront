@@ -5,7 +5,7 @@ import OrderProducts from '../../types/OrderProducts.type';
 import constants from '../../Utils/errorConstants.utils';
 import sendErr, { Side } from '../../Utils/sendError.utils';
 
-interface userOrderProducts {
+export interface userOrderProducts {
     email: string;
     total: number;
     products: [{ orderId: number; price: string; name: string; qty: number }];
@@ -22,7 +22,13 @@ class OrderProductsModel {
                 op.qty,
             ]);
             if (result.rows.length) {
-                return result.rows[0];
+                const row = result.rows[0];
+                return {
+                    id: row.id,
+                    orderId: row.order_id,
+                    productId: row.product_id,
+                    qty: row.qty
+                };
             } else {
                 throw sendErr(Side.database, constants.default.noDataFound);
             }
@@ -33,9 +39,7 @@ class OrderProductsModel {
                     `violates foreign key constraint \"order_products_order_id_fkey\"`
                 )
             ) {
-                console.log(
-                    'you must create user first and pass availd user_token stored in database'
-                );
+               
                 throw sendErr(Side.security, constants.default.forbidden);
             } else {
                 throw sendErr(Side.database, error);
@@ -46,9 +50,8 @@ class OrderProductsModel {
     index = async (): Promise<userOrderProducts> => {
         try {
             const sql =
-                "SELECT u.email,count(p.name) as count, sum(p.price) as total, json_agg(json_build_object( 'orderId', o.id, 'price', p.price, 'name', p.name, 'qty', op.qty ) ) AS products from order_products as op Left join orders as o on op.order_id = o.id Left join products as p on op.product_id = p.id Left join users as u on o.user_id = u.id group by u.email";
+                "SELECT u.email, count(p.name) as count, sum(p.price) as total, json_agg(json_build_object( 'orderId', o.id, 'price', p.price, 'name', p.name, 'qty', op.qty ) ) AS products from order_products as op Left join orders as o on op.order_id = o.id Left join products as p on op.product_id = p.id Left join users as u on o.user_id = u.id group by u.email";
             const result = await connect.result(sql);
-            console.log(result);
             if (result.rows.length) {
                 return result.rows as unknown as userOrderProducts;
             } else {
@@ -59,15 +62,13 @@ class OrderProductsModel {
         }
     };
 
-    show = async (op: OrderProducts): Promise<unknown> => {
-        console.log(op.orderId, op.productId);
+    show = async (op: OrderProducts): Promise<userOrderProducts[]> => {
         try {
             const sql = `SELECT op.order_id As order, op.product_id as product, op.qty, p.name, p.price FROM order_products AS op JOIN products AS p ON p.id=op.product_id WHERE op.order_id=$1 AND op.product_id=$2`;
             const result = await connect.result(sql, [
                 op.orderId,
                 op.productId,
             ]);
-            console.log(result.rows);
             if (result.rows.length) {
                 return result.rows;
             } else {
@@ -110,7 +111,6 @@ class OrderProductsModel {
         try {
             const sql = 'DELETE FROM order_products WHERE id=$1 returning *';
             const result = await connect.result(sql, [id]);
-            console.log(result, result.rowCount);
             if (result.rows.length) {
                 return result.rows[0];
             } else {

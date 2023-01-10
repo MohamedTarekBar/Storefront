@@ -9,7 +9,6 @@ const authUserValidator = (
     res: Response,
     next: NextFunction
 ) => {
-    console.log('sa');
     const validation = Joi.object({
         email: Joi.string()
             .email({

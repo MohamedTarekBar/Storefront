@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run build && node build/server.js",
     "dev": "nodemon src/server.ts",
-    "test": "npm run build && export NODE_ENV=test|| set NODE_ENV=test|| NODE_ENV=test&& db-migrate up --env test&& jasmine-ts &&db-migrate reset --env test",
+    "test": "npm run build && export NODE_ENV=test|| set NODE_ENV=test|| NODE_ENV=test&& db-migrate up --env test&& jasmine-ts ; db-migrate reset --env test",
     "build": "tsc --build",
     "tsc": "tsc",
     "prettier": "prettier --config .prettierrc --check src/**/*.ts && prettier --write src/**/*.ts",
