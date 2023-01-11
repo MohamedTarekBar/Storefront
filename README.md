@@ -59,11 +59,25 @@ Before submitting your project, spin it up and test each endpoint. If each one r
 
 ## How To Start ? 
 first of all create your database and spare database for test;
+1 - connect to postgres `psql -U postgres`
+2 - create Database for (dev and test)
+```sql 
 
-run this script `npm run setup` it will install all packages and create blank env file if u are not using mac os
+  SELECT 'CREATE DATABASE storefront'
+  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront')\gexec
+  SELECT 'CREATE DATABASE storefront_test'
+  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront')\gexec
 
-run `npm install; db-migrate up; npm run dev` and add below code to env file first 
+  OR 
 
+  Create Database storefront
+  create Database Storefront_test
+  
+```
+3 - run this script `npm run setup` it will install all packages and create blank env file if u are not using mac os
+    run `npm install; db-migrate up; npm run dev` and add below code to env file first 
+
+```.env
 PORT=3000
 NODE_ENV=dev
 POSTGRES_HOST=localhost
@@ -75,4 +89,5 @@ POSTGRES_PASSWORD=
 BYCRYPT_PASSWORD=secret_key
 SALT_ROUNDS=10
 TOKEN_SECRET=secret_key
+```
 
