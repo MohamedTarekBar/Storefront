@@ -64,14 +64,14 @@ first of all create your database and spare database for test;
 ```sql 
 
   SELECT 'CREATE DATABASE storefront'
-  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront')\gexec
+  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront')\gexec;
   SELECT 'CREATE DATABASE storefront_test'
-  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront')\gexec
+  WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'storefront_test')\gexec;
 
   OR 
 
-  Create Database storefront
-  create Database Storefront_test
+  Create Database storefront;
+  create Database Storefront_test;
   
 ```
 3 - run this script `npm run setup` it will install all packages and create blank env file if u are not using mac os
