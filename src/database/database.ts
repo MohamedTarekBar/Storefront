@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let client: Pool = new Pool({ ssl: false });
+let client: Pool = new Pool();
 
 const {
     NODE_ENV,
@@ -20,6 +20,9 @@ if (NODE_ENV === 'dev') {
         host: POSTGRES_HOST,
         user: POSTGRES_USER,
         password: POSTGRES_PASSWORD,
+        ssl: {
+            rejectUnauthorized: false
+        },
     });
 } else if (NODE_ENV === 'test') {
     client = new Pool({
@@ -27,6 +30,9 @@ if (NODE_ENV === 'dev') {
         host: POSTGRES_HOST,
         user: POSTGRES_USER,
         password: POSTGRES_PASSWORD,
+        ssl: {
+            rejectUnauthorized: false
+        },
     });
 } else {
     console.log('error /config');
