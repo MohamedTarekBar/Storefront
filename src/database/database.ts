@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-let client: Pool = new Pool();
+let client: Pool = new Pool({ ssl: true });
 
 const {
     NODE_ENV,
